@@ -1,0 +1,12 @@
+openapi: 3.0.1
+info:
+  title: My Super API
+  description: |
+    Nunc commodo ipsum vitae dignissim congue. Quisque convallis malesuada tortor, non
+    lacinia quam malesuada id. Curabitur nisi mi, lobortis non tempus vel, vestibulum et neque.
+
+    ...
+  version: "1.0"
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html

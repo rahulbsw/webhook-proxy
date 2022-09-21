@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Rules</title>
+    <style type="text/css" media="screen">
+        #ace_js, #ace_css {
+            width: 95%;
+            height: 15em;
+            border: 1px solid silver;
+        }
+    </style>
+    <script>
+        function show_configs(sink,params) {
+            const configDiv= document.getElementById("config");
+            configDiv.innerHTML=""
+            params.forEach(function (value) {
+                let label=value;
+                let param=sink+"."+ value;
+                if(param!="" && document.getElementById(param)==undefined)
+                    configDiv.innerHTML += "<label for='"+param+"'>"+label+"</label> <input type='text' id='"+param+"' name='"+param+"' class='constantsSummary'></br>";
+            })
+        }
+    </script>
+</head>
+<body>
+<form onsubmit="return on_submit()" action="/register" method="post">
+
+    Name:
+    <input type="text" id="name" name="name" value=""/><br>
+    Sink Type:
+    <div class="ace-twilight" >
+    <input type="radio" id="http" name="sink" value="http" onchange="show_configs(this.value,['url'])"/>
+    <label for="http">HTTP</label>
+    &nbsp;&nbsp;
+    <input type="radio" id="kafka" name="sink" value="kafka" onchange="show_configs(this.value,['broker-url','topic'])"/>
+    <label for="http">Kafka</label>
+    &nbsp;&nbsp;
+    <input type="radio" id="console" name="sink" value="console" onchange="show_configs(this.value,[])"/>
+    <label for="console">Console</label>
+    &nbsp;&nbsp;
+    <input type="radio" id="null" name="sink" value="null"  onchange="show_configs(this.value,[])"/>
+    <label for="null">Null</label>
+    &nbsp;&nbsp;
+    <div id="config" name="config"></div>
+    </div>
+    <hr>
+    Transformation Specification:
+    <a href="https://github.com/schibsted/jslt/blob/master/tutorial.md" target="_blank"><img src="images/tutorial.jpg" height="12" width="12" /></a>
+    <div id="ace_json">{
+        "Array": [1, 2, 3],
+        "Boolean": true,
+        "Null": null,
+        "Number": 123,
+        "Object": {"a": "b", "c": "d"},
+        "String": "Hello World"
+        }
+    </div>
+    <input type="hidden" id="spec" name="spec" value=""/><br>
+    <button>Go</button>
+</form>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/ace.js"
+        integrity="sha256-m7pa1Wh06liKoIDP19avGEdTGo+LoDNxeiHhVkq2hVQ=" crossorigin="anonymous"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.7.5/beautify.min.js"
+        integrity="sha256-z3YWAUWq4ZqhJwjqxdTFwmXUOkEPpQUpdxWHCZVADA4=" crossorigin="anonymous"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.7.5/beautify-css.min.js"
+        integrity="sha256-j7ahmt6lLS5KOhBLZUivk4/awJlkM8eDP/CYbrCDqRA=" crossorigin="anonymous"></script>
+
+<script>
+    const editor_json = ace.edit("ace_json", {
+        mode: "ace/mode/json",
+        theme:"ace/theme/twilight",
+        minLines: 10,
+        maxLines: 10,
+        tabSize: 2,
+        showPrintMargin: false
+
+    });
+
+    /**
+     * @link https://github.com/beautify-web/js-beautify
+     */
+    editor_json.getSession().setValue(js_beautify(editor_json.getValue(), {
+        indent_size: 2
+    }));
+
+    function on_submit() {
+        document.getElementById("spec").value = editor_json.getValue();
+        return true;
+    }
+
+</script>
+</body>
+</html>
