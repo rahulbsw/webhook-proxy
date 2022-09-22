@@ -18,7 +18,13 @@
                 let label=value;
                 let param=sink+"."+ value;
                 if(param!="" && document.getElementById(param)==undefined)
-                    configDiv.innerHTML += "<label for='"+param+"'>"+label+"</label> <input type='text' id='"+param+"' name='"+param+"' class='constantsSummary'></br>";
+                    if(label.startsWith('is')||label.startsWith('do')||label.startsWith('enable')||label.startsWith('flag'))
+                    {
+                        configDiv.innerHTML += " <label for='"+param+"'>"+label+"</label> <input type='radio' id='true' name='"+param+"' value='true'/> <label for='true'>Yes</label>"
+                        configDiv.innerHTML += " <input type='radio' id='false' name='"+param+"' value='false'/> <label for='false'>No</label>"
+                    }
+                    else
+                        configDiv.innerHTML += "<label for='"+param+"'>"+label+"</label> <input type='text' id='"+param+"' name='"+param+"' class='constantsSummary'></br>";
             })
         }
     </script>
@@ -30,16 +36,16 @@
     <input type="text" id="name" name="name" value=""/><br>
     Sink Type:
     <div class="ace-twilight" >
-    <input type="radio" id="http" name="sink" value="http" onchange="show_configs(this.value,['url'])"/>
+    <input type="radio" id="http" name="sink" value="http" onchange="show_configs(this.value,['url','isMessageList'])"/>
     <label for="http">HTTP</label>
     &nbsp;&nbsp;
-    <input type="radio" id="kafka" name="sink" value="kafka" onchange="show_configs(this.value,['broker-url','topic'])"/>
+    <input type="radio" id="kafka" name="sink" value="kafka" onchange="show_configs(this.value,['broker-url','topic','isMessageList'])"/>
     <label for="http">Kafka</label>
     &nbsp;&nbsp;
-    <input type="radio" id="console" name="sink" value="console" onchange="show_configs(this.value,[])"/>
+    <input type="radio" id="console" name="sink" value="console" onchange="show_configs(this.value,['isMessageList'])"/>
     <label for="console">Console</label>
     &nbsp;&nbsp;
-    <input type="radio" id="null" name="sink" value="null"  onchange="show_configs(this.value,[])"/>
+    <input type="radio" id="null" name="sink" value="null"  onchange="show_configs(this.value,['isMessageList'])"/>
     <label for="null">Null</label>
     &nbsp;&nbsp;
     <div id="config" name="config"></div>

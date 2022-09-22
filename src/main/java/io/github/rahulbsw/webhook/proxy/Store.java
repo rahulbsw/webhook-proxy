@@ -10,6 +10,7 @@ import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -88,7 +89,7 @@ public class Store {
         init(null);
     }
 
-    public static Message process(String name,JsonNode message) throws SinkFailureException {
+    public static List<Message> process(String name, JsonNode message) throws SinkFailureException {
          return sinks.get(name).process(message);
     }
 

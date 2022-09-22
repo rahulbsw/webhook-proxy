@@ -22,6 +22,7 @@ import io.jooby.rocker.RockerModule;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class App extends Jooby {
@@ -88,9 +89,9 @@ public class App extends Jooby {
     post("/{name}",ctx -> {
       try {
         String name = ctx.path("name").value();
-        Message message=Store.process(name,ctx.body(JsonNode.class));
+        List<Message> messages=Store.process(name,ctx.body(JsonNode.class));
         ctx.setResponseCode(StatusCode.OK);
-        return message;
+        return messages;
       } catch (Exception e) {
         ctx.setResponseCode(StatusCode.BAD_REQUEST);
         return new Message.Builder().put("message", "Registered Failed.").put("error", e.getMessage()).build();
