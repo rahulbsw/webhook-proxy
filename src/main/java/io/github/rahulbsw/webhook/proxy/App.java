@@ -10,14 +10,19 @@ import com.google.common.base.Strings;
 import com.typesafe.config.Config;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
+import io.github.rahulbsw.webhook.proxy.sink.KafkaSink;
+import io.github.rahulbsw.webhook.proxy.sink.SinkFactory;
+import io.github.rahulbsw.webhook.proxy.sink.exception.SinkFailureException;
 import io.jooby.Environment;
 import io.jooby.Jooby;
 import io.jooby.MediaType;
 import io.jooby.RateLimitHandler;
 import io.jooby.StatusCode;
 import io.jooby.json.JacksonModule;
+import io.jooby.kafka.KafkaProducerModule;
 import io.jooby.metrics.MetricsModule;
 import io.jooby.rocker.RockerModule;
+import org.apache.kafka.clients.producer.KafkaProducer;
 
 import java.nio.file.Paths;
 import java.time.Duration;
@@ -36,6 +41,9 @@ public class App extends Jooby {
     install(new RockerModule());
 
     //install(new JacksonModule(new XmlMapper()));
+    Boolean isKafkaEnabled=conf.hasPath("kafka.producer.bootstrap.servers") && !Strings.isNullOrEmpty(conf.getString("kafka.producer.bootstrap.servers"));
+    if(isKafkaEnabled)
+      install(new KafkaProducerModule());
     install(new MetricsModule()
             .ping()
             .healthCheck("deadlock", new ThreadDeadlockHealthCheck())
@@ -73,6 +81,16 @@ public class App extends Jooby {
             if (key.startsWith(sink)) config.put(key.substring(sink.length()+1),input.get(key));
           });
         WebhookConfig webhookConfig = ctx.form(WebhookConfig.class);
+        if(SinkFactory.SinkType.KAFKA.equals(sink))
+        {
+          if(isKafkaEnabled) {
+            KafkaProducer producer = require(KafkaProducer.class);
+            config.put(KafkaSink.KAFKA_PRODUCER_KEY, producer);
+          }
+          else {
+            throw new SinkFailureException("KafkaSink not supported: Kafka Properties are not configure on server.");
+          }
+        }
         webhookConfig.config=config;
         Store.put(webhookConfig);
         ctx.setResponseCode(StatusCode.OK);

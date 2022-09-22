@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class SinkFactory
 {
-    public enum SinkType {HTTP,CONSOLE,NULL,KAFKA}
+    public enum SinkType {HTTP,CONSOLE,NULL,KAFKA,MONGODB}
     public static AbstractSink getSink(WebhookConfig webhookConfig){
         Transformer transformer;
         SinkType sinkType;
@@ -19,6 +19,8 @@ public class SinkFactory
         transformer=new Transformer(webhookConfig.spec);
         switch (sinkType){
             case HTTP: return new HttpSink(webhookConfig.config,transformer);
+            case KAFKA: return new KafkaSink(webhookConfig.config,transformer);
+            case MONGODB: return new MongodbSink(webhookConfig.config,transformer);
             case NULL:return new NullSink(webhookConfig.config,transformer);
             default: return new ConsoleSink(webhookConfig.config,transformer);
         }

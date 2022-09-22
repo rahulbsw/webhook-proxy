@@ -21,10 +21,12 @@
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <bucket4j.version>7.5.0</bucket4j.version>
+    <bucket4j.version>7.6.0</bucket4j.version>
     <mapdb.version>3.0.8</mapdb.version>
     <jolt.version>0.1.7</jolt.version>
-    <jslt.version>0.1.12</jslt.version>
+    <jslt.version>0.1.13</jslt.version>
+    <kafka.version>3.2.1</kafka.version>
+    <mongodb.version></mongodb.version>
   </properties>
 
   <dependencies>
@@ -55,10 +57,16 @@
       <artifactId>jooby-rocker</artifactId>
     </dependency>
 
-<!--    <dependency>-->
-<!--      <groupId>io.jooby</groupId>-->
-<!--      <artifactId>jooby-kafka</artifactId>-->
-<!--    </dependency>-->
+    <dependency>
+      <groupId>io.jooby</groupId>
+      <artifactId>jooby-kafka</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.kafka</groupId>
+          <artifactId>kafka-clients</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
 
     <dependency>
       <groupId>io.jooby</groupId>
@@ -121,6 +129,11 @@
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
+      <version>${kafka.version}</version>
     </dependency>
   </dependencies>
 
