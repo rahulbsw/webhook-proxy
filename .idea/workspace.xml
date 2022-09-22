@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb3ca69f-8cad-4f99-a35b-72581cad5389" name="Changes" comment="Fix HttpSink and add handling for message array">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/rahulbsw/webhook/proxy/sink/KafkaSink.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/rahulbsw/webhook/proxy/sink/MongodbSink.java" afterDir="false" />
+    <list default="true" id="bb3ca69f-8cad-4f99-a35b-72581cad5389" name="Changes" comment="Added KafkaSink support">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post-example.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registration-example.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/application.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/application.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/rahulbsw/webhook/proxy/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/rahulbsw/webhook/proxy/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/rahulbsw/webhook/proxy/sink/SinkFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/rahulbsw/webhook/proxy/sink/SinkFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +128,7 @@
       <workItem from="1655162367912" duration="25469000" />
       <workItem from="1656022509674" duration="5060000" />
       <workItem from="1659292284445" duration="10946000" />
-      <workItem from="1663628847980" duration="69968000" />
+      <workItem from="1663628847980" duration="71157000" />
     </task>
     <task id="LOCAL-00001" summary="version 0.01">
       <created>1663742374013</created>
@@ -148,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663808866270</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added KafkaSink support">
+      <created>1663888280411</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1663888280411</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,7 +174,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="version 0.01" />
     <MESSAGE value="Fix HttpSink and add handling for message array" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix HttpSink and add handling for message array" />
+    <MESSAGE value="Added KafkaSink support" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added KafkaSink support" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
