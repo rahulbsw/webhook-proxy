@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb3ca69f-8cad-4f99-a35b-72581cad5389" name="Changes" comment="Added KafkaSink support">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/post-example.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/registration-example.png" afterDir="false" />
+    <list default="true" id="bb3ca69f-8cad-4f99-a35b-72581cad5389" name="Changes" comment="Added description and example">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,7 +125,7 @@
       <workItem from="1655162367912" duration="25469000" />
       <workItem from="1656022509674" duration="5060000" />
       <workItem from="1659292284445" duration="10946000" />
-      <workItem from="1663628847980" duration="71157000" />
+      <workItem from="1663628847980" duration="79778000" />
     </task>
     <task id="LOCAL-00001" summary="version 0.01">
       <created>1663742374013</created>
@@ -151,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663888280411</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added description and example">
+      <created>1663889466512</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1663889466512</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,7 +179,8 @@
     <MESSAGE value="version 0.01" />
     <MESSAGE value="Fix HttpSink and add handling for message array" />
     <MESSAGE value="Added KafkaSink support" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added KafkaSink support" />
+    <MESSAGE value="Added description and example" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added description and example" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
