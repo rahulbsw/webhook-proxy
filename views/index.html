@@ -5,8 +5,8 @@
     <title>Register Rules</title>
     <style type="text/css" media="screen">
         #ace_js, #ace_css {
-            width: 95%;
-            height: 15em;
+            width: 60%;
+            height: 40%;
             border: 1px solid silver;
         }
     </style>
@@ -32,24 +32,34 @@
 <body>
 <form onsubmit="return on_submit()" action="/register" method="post">
 
-    Name:
-    <input type="text" id="name" name="name" value=""/><br>
+    Endpoint :
+    <input type="text" id="name" name="name" value="" /><br>
+
+    <hr>
     Sink Type:
-    <div class="ace-twilight" >
-    <input type="radio" id="http" name="sink" value="http" onchange="show_configs(this.value,['url','isMessageList'])"/>
-    <label for="http">HTTP</label>
-    &nbsp;&nbsp;
-    <input type="radio" id="kafka" name="sink" value="kafka" onchange="show_configs(this.value,['topic','isMessageList'])"/>
-    <label for="http">Kafka</label>
-    &nbsp;&nbsp;
-    <input type="radio" id="console" name="sink" value="console" onchange="show_configs(this.value,['isMessageList'])"/>
-    <label for="console">Console</label>
-    &nbsp;&nbsp;
-    <input type="radio" id="null" name="sink" value="null"  onchange="show_configs(this.value,['isMessageList'])"/>
-    <label for="null">Null</label>
-    &nbsp;&nbsp;
+    <table>
+    <tr>
+        <td>
+            <input type="radio" id="http" name="sink" value="http" onchange="show_configs(this.value,['url','isMessageList'])"/>
+            <label for="http">HTTP</label>
+    &nbsp;&nbsp; </td>
+        <td>
+            <input type="radio" id="kafka" name="sink" value="kafka" onchange="show_configs(this.value,['topic','isMessageList'])"/>
+            <label for="http">Kafka</label>
+        </td>
+    &nbsp;&nbsp;</tr>
+        <tr>
+            <td>
+                <input type="radio" id="console" name="sink" value="console" onchange="show_configs(this.value,['isMessageList'])"/>
+                <label for="console">Console</label>
+    &nbsp;       </td>
+            <td>
+                <input type="radio" id="null" name="sink" value="null"  onchange="show_configs(this.value,['isMessageList'])"/>
+                <label for="null">Null</label>
+            </td>
+        </tr>
+    </table>&nbsp;&nbsp;
     <div id="config" name="config"></div>
-    </div>
     <hr>
     Transformation Specification:
     <a href="https://github.com/schibsted/jslt/blob/master/tutorial.md" target="_blank"><img src="images/tutorial.jpg" height="12" width="12" /></a>
@@ -80,9 +90,9 @@
         mode: "ace/mode/json",
         theme:"ace/theme/twilight",
         minLines: 10,
-        maxLines: 10,
+        maxLines: 30,
         tabSize: 2,
-        showPrintMargin: false
+        showPrintMargin: true
 
     });
 

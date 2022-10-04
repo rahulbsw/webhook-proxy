@@ -16,18 +16,20 @@ import io.github.rahulbsw.webhook.proxy.sink.exception.SinkFailureException;
 import io.jooby.Environment;
 import io.jooby.Jooby;
 import io.jooby.MediaType;
+import io.jooby.ModelAndView;
 import io.jooby.RateLimitHandler;
 import io.jooby.StatusCode;
+import io.jooby.handlebars.HandlebarsModule;
 import io.jooby.json.JacksonModule;
 import io.jooby.kafka.KafkaProducerModule;
 import io.jooby.metrics.MetricsModule;
-import io.jooby.rocker.RockerModule;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class App extends Jooby {
@@ -38,7 +40,6 @@ public class App extends Jooby {
     Store.init(conf.getString("db.file"));
     ObjectMapper objectMapper=new ObjectMapper();
     install(new JacksonModule(objectMapper));
-    install(new RockerModule());
 
     //install(new JacksonModule(new XmlMapper()));
     Boolean isKafkaEnabled=conf.hasPath("kafka.producer.bootstrap.servers") && !Strings.isNullOrEmpty(conf.getString("kafka.producer.bootstrap.servers"));
@@ -65,12 +66,19 @@ public class App extends Jooby {
     }));
 
 
-    assets("/css/*", Paths.get("public", "css"));
-    assets("/images/*", Paths.get("public", "images"));
-    assets("/js/*", Paths.get("public", "js"));
-    assets("/view/*", Paths.get("public", "view"));
-    assets("/index.html", Paths.get("public", "index.html"));
-    assets("/favicon.ico",Paths.get("public", "images","favicon.ico"));
+    assets("/css/*", Paths.get("views", "css"));
+    assets("/images/*", Paths.get("views", "images"));
+    assets("/js/*", Paths.get("views", "js"));
+    assets("/favicon.ico",Paths.get("views", "favicon.ico"));
+
+    install(new HandlebarsModule());
+
+    get("/", ctx -> {
+      Map<String, Object> model = new HashMap<>();
+      return new ModelAndView("index.html", model)
+              .setLocale(Locale.US);
+    });
+
     post("/register",ctx -> {
       try{
         Map<String, String> input=ctx.multipartMap();

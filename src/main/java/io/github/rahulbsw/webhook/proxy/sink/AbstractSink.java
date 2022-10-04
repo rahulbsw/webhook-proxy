@@ -23,15 +23,19 @@ abstract public class AbstractSink<K,V> {
 
     public List<Message<K,V>> process(JsonNode input) throws SinkFailureException {
         JsonNode value= transformer.transform(input);
-        if(isMessageList && value.isArray()){
-            List<Message<K,V>> messages=new ArrayList<>();
-            for (JsonNode node: ((ArrayNode)value)) {
-                messages.add(post(node));
+        if(!value.isEmpty()){
+            if (isMessageList && value.isArray()) {
+                List<Message<K, V>> messages = new ArrayList<>();
+                for (JsonNode node : ((ArrayNode) value)) {
+                    if (!node.isEmpty())
+                        messages.add(post(node));
+                }
+                return messages;
+            } else {
+                return Arrays.asList(post(value));
             }
-            return messages;
-        }else{
-           return Arrays.asList(post(value));
         }
+        return new ArrayList<>();
     }
 
     abstract public Message<K,V> post(JsonNode value) throws SinkFailureException;
