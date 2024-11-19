@@ -25,7 +25,7 @@
     <mapdb.version>3.0.8</mapdb.version>
     <jolt.version>0.1.7</jolt.version>
     <jslt.version>0.1.13</jslt.version>
-    <kafka.version>3.2.1</kafka.version>
+    <kafka.version>3.7.1</kafka.version>
     <mongodb.version></mongodb.version>
   </properties>
 
